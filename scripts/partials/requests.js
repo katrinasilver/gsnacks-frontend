@@ -1,5 +1,6 @@
 const axios = require('axios')
 const url = 'http://localhost:3000'
+const snacks = `${url}/snacks`
 
 const header = () => {
   let bearer = ''
@@ -19,15 +20,13 @@ const login = (credentials) => axios.post(`${url}/login`, credentials)
 const getid = () => axios.get(`${url}/login`, header())
 const signup = (credentials) => axios.post(`${url}/signup`, credentials)
 
-const read = () => axios.get(`${url}/snacks`, header())
-const readOne = (id) => axios.get(`${url}/snacks/${id}`, header())
-const readReviews = (id) => axios.get(`${url}/snacks/${id}/reviews`, header())
+const read = () => axios.get(snacks, header())
+const readOne = (id) => axios.get(`${snacks}/${id}`, header())
+const readReviews = (id) => axios.get(`${snacks}/${id}/reviews`, header())
 
-const remove = (id, rid) => axios.delete(`${url}/snacks/${id}/reviews/${rid}`, header())
-const create = (id, review) => axios.post(`${url}/snacks/${id}/reviews/`, review, header())
-const edit = (id, rid, review) => {
-  return axios.patch(`${url}/snacks/${id}/reviews/${rid}`, review, header())
-}
+const create = (id, userid, review) => axios.post(`${snacks}/${id}/user/${userid}/review/`, review, header())
+const edit = (id, rid, review) => axios.patch(`${snacks}/${id}/user/${userid}/review/${rid}`, review, header())
+const remove = (id, userid, rid) => axios.delete(`${snacks}/${id}/user/${userid}/review/${rid}`, header())
 
 module.exports = {
   login,

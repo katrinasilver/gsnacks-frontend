@@ -33,17 +33,11 @@ const footer = () => {
 
 const form = () => {
   return `
-    <form id="form" class="form col s12 m8">
-      <h3>Love it? Hate it? Rate it!</h3>
+    <form id="form" class="form col s12">
       <div class="input-field">
         <input id="title" type="text" data-length="50" class="validate" required>
         <label for="title">Title</label>
         <span class="helper-text" data-error="oops! something is wrong..." data-success="looking good!">example: Amazing Spiderman #1</span>
-      </div>
-      <div class="input-field">
-        <input id="image_url" type="url" pattern="^(http|https):([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)" class="validate" required>
-        <label for="image_url">Image URL</label>
-        <span class="helper-text" data-error="please use a valid image URL" data-success="looking good!"></span>
       </div>
       <label>
         <input name="ratings" value="5" type="radio" checked/>
@@ -76,10 +70,7 @@ const form = () => {
         <input class="reset btn red" type="reset">
       </div>
       <p class="hidden notice teal white-text center-align"></p>
-    </form>
-    <div class="comic-image valign-wrapper col s12 m4">
-      <img src="https://imgplaceholder.com/450x600/ffffff/eeeeee/fa-image" alt="Cover Image">
-    </div>`
+    </form>`
 }
 
 const editReview = ({ id, title, url, rating, review }) => {

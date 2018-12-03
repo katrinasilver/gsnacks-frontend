@@ -5156,33 +5156,33 @@ body {
 
 /* New Rating */
 .snack .form label,
-.add-rating .form label {
+.add-review .form label {
   margin: .5rem .5rem 0 0; }
 
 .snack .form textarea,
-.add-rating .form textarea {
+.add-review .form textarea {
   height: auto; }
 
 .snack input[type="radio"] + span,
-.add-rating input[type="radio"] + span {
+.add-review input[type="radio"] + span {
   text-align: center; }
   .snack input[type="radio"] + span i,
-  .add-rating input[type="radio"] + span i {
+  .add-review input[type="radio"] + span i {
     display: block; }
   .snack input[type="radio"] + span:before, .snack input[type="radio"] + span:after,
-  .add-rating input[type="radio"] + span:before,
-  .add-rating input[type="radio"] + span:after {
+  .add-review input[type="radio"] + span:before,
+  .add-review input[type="radio"] + span:after {
     display: none; }
 
 .snack input[type="radio"]:not(:checked) + span,
-.add-rating input[type="radio"]:not(:checked) + span {
+.add-review input[type="radio"]:not(:checked) + span {
   padding: 0; }
 
 .snack input[type="radio"]:checked + span,
-.add-rating input[type="radio"]:checked + span {
+.add-review input[type="radio"]:checked + span {
   padding: 0; }
   .snack input[type="radio"]:checked + span i,
-  .add-rating input[type="radio"]:checked + span i {
+  .add-review input[type="radio"]:checked + span i {
     color: #3f51b5; }
 
 /* Current Ratings */
