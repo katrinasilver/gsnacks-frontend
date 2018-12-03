@@ -9,7 +9,7 @@ const header = () => {
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
-          <a href="./ratings.html">
+          <a href="./signup.html">
             <i class="tiny material-icons">account_circle</i> Signup
           </a>
         </li>

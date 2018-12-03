@@ -1,6 +1,6 @@
 const { header, footer, form, collection, one, editReview, moreReviews } = require('./templates')
 const { notify, eventListener } = require('./utils')
-const { read, readOne, readReviews, remove, update } = require('./reviews')
+const { read, readOne, readReviews, remove, update } = require('./requests')
 
 const params = window.location.search.slice(1)
   .split('&').map(e => e.split('='))

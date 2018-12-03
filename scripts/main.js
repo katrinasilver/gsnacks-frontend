@@ -1,16 +1,17 @@
-const { renderHomepage, renderOne, renderRatings, addForm, swapImg } = require('./partials/render')
-const { create, read, readOne, readReviews, request } = require('./partials/reviews')
-const { notify, eventListener } = require('./partials/utils')
+const { renderHomepage, renderOne, renderRatings } = require('./partials/render')
+const { create, read, readOne, readReviews } = require('./partials/requests')
+// const { notify, eventListener } = require('./partials/utils')
+const signup = require('./partials/signup')
 
 const reviews = document.querySelector('.reviews')
 const collection = document.querySelector('.collection')
 const snack = document.querySelector('.snack')
-const addRating = document.querySelector('.add-rating')
+// const addRating = document.querySelector('.add-rating')
 
-if (addRating) {
-  addForm(addRating)
-  swapImg('.comic-image img')
-}
+// if (addRating) {
+//   addForm(addRating)
+//   swapImg('.comic-image img')
+// }
 
 // eventListener('#form', 'submit', (e) => {
 //   e.preventDefault()
@@ -29,18 +30,16 @@ if (addRating) {
 //   eventListener('.reset', 'click', () => window.location.reload(true))
 // })
 
-eventListener('#form', 'submit', (e) => {
-  e.preventDefault()
-  const email = e.target.email.value
-  const password = e.target.password.value
 
-  request('/login', 'post', { email, password })
-    .then(response => {
-      localStorage.setItem('token', response.data.token)
-      window.location = '/ratings.html'
-    }).catch(error => console.log(error))
-})
+const initialize = {
+  '/signup.html': signup.init
+  // '/login.html': login.init
+}
 
+const path = window.location.pathname
+
+if (initialize.hasOwnProperty(path)) initialize[path]()
+else console.error(`${ path } can't initialize`)
 
 if (snack) readOne(window.location.search.slice(-1)).then(() => renderOne(snack))
 if (snack) readReviews(window.location.search.slice(-1)).then(response => renderRatings(collection, response.data))
