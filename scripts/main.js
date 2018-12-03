@@ -2,6 +2,7 @@ const { renderHomepage, renderOne, renderRatings } = require('./partials/render'
 const { create, read, readOne, readReviews } = require('./partials/requests')
 // const { notify, eventListener } = require('./partials/utils')
 const signup = require('./partials/signup')
+const login = require('./partials/login')
 
 const reviews = document.querySelector('.reviews')
 const collection = document.querySelector('.collection')
@@ -30,10 +31,9 @@ const snack = document.querySelector('.snack')
 //   eventListener('.reset', 'click', () => window.location.reload(true))
 // })
 
-
 const initialize = {
-  '/signup.html': signup.init
-  // '/login.html': login.init
+  '/signup.html': signup.init,
+  '/login.html': login.init
 }
 
 const path = window.location.pathname
