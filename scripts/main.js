@@ -1,18 +1,9 @@
-const { renderHomepage, renderOne, renderRatings } = require('./partials/render')
-const { create, read, readOne, readReviews } = require('./partials/requests')
-// const { notify, eventListener } = require('./partials/utils')
+require('./partials/render')
+const path = window.location.pathname
 const signup = require('./partials/signup')
 const login = require('./partials/login')
-
-const reviews = document.querySelector('.reviews')
-const collection = document.querySelector('.collection')
-const snack = document.querySelector('.snack')
-// const addRating = document.querySelector('.add-rating')
-
-// if (addRating) {
-//   addForm(addRating)
-//   swapImg('.comic-image img')
-// }
+const snack = require('./partials/snack')
+const index = require('./partials/homepage')
 
 // eventListener('#form', 'submit', (e) => {
 //   e.preventDefault()
@@ -32,15 +23,12 @@ const snack = document.querySelector('.snack')
 // })
 
 const initialize = {
+  '/': index.init,
+  '/index.html' : index.init,
   '/signup.html': signup.init,
-  '/login.html': login.init
+  '/login.html': login.init,
+  '/snack.html' : snack.init
 }
-
-const path = window.location.pathname
 
 if (initialize.hasOwnProperty(path)) initialize[path]()
 else console.error(`${ path } can't initialize`)
-
-if (snack) readOne(window.location.search.slice(-1)).then(() => renderOne(snack))
-if (snack) readReviews(window.location.search.slice(-1)).then(response => renderRatings(collection, response.data))
-if (reviews) read().then(response => renderHomepage(response.data))

@@ -2,7 +2,7 @@ const { starRating } = require('./utils')
 
 const header = () => {
   return `
-  <nav class="indigo">
+  <nav class="red darken-3">
     <div class="nav-wrapper container">
       <a href="/" class="brand-logo">
         gSnacks
@@ -16,6 +16,29 @@ const header = () => {
         <li>
           <a href="./login.html">
             <i class="tiny material-icons">verified_user</i> Login
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>`
+}
+
+const headerLogin = ( email ) => {
+  return `
+  <nav class="red darken-3">
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo">
+        gSnacks
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a href="./signup.html">
+            <i class="tiny material-icons">account_circle</i> Hello ${ email }
+          </a>
+        </li>
+        <li>
+          <a class="logout" href="./login.html">
+            <i class="tiny material-icons">verified_user</i> Logout
           </a>
         </li>
       </ul>
@@ -83,48 +106,6 @@ const form = () => {
     </div>`
 }
 
-const moreReviews = ({ id, name, img }) => {
-  return `
-  <div class="item col s12 m6 l3">
-    <div class="card hoverable" data-id="${ id }">
-      <div class="card-image waves-effect waves-block waves-light">
-        <a href="./snack.html?id=${ id }">
-          <img class="activator" src="${ img }" alt="${ name }">
-        </a>
-      </div>
-      <div class="card-content">
-        <a href="./snack.html?id=${ id }">
-          <span class="card-title">${ name }</span>
-        </a>
-      </div>
-    </div>
-  </div>`
-}
-
-const collection = ({ id, title, rating, comment }) => {
-  return `
-  <div class="collection-item row" data-id="${ id }">
-    <div class="details col s12">
-      <h4>${ title }</h4>
-      <p>${ starRating(rating) }</p>
-      <p>${ comment }...</p>
-    </div>
-  </div>`
-}
-
-const one = ({ id, name, img, description }) => {
-  return `
-  <div class="row" data-id="${ id }">
-    <div class="valign-wrapper col s12 m4">
-      <img class="z-depth-1" src="${ img }" alt="${ name }">
-    </div>
-    <div class="col s12 m8">
-      <h3>${ name }</h3>
-      <p>${ description }</p>
-    </div>
-  </div>`
-}
-
 const editReview = ({ id, title, url, rating, review }) => {
   return `
   <div class="editing" data-id="${ id }">
@@ -175,12 +156,57 @@ const editReview = ({ id, title, url, rating, review }) => {
   </div>`
 }
 
+const grid = ({ id, name, img }) => {
+  return `
+  <div class="item col s12 m6 l3">
+    <div class="card hoverable" data-id="${ id}">
+      <div class="card-image waves-effect waves-block waves-light">
+        <a href="./snack.html?id=${ id}">
+          <img class="activator" src="${ img}" alt="${name}">
+        </a>
+      </div>
+      <div class="card-content">
+        <a href="./snack.html?id=${ id}">
+          <span class="card-title">${ name}</span>
+        </a>
+      </div>
+    </div>
+  </div>`
+}
+
+const one = ({ id, name, img, description, price }) => {
+  return `
+  <div class="row" data-id="${ id }">
+    <div class="valign-wrapper col s12 m4">
+      <img class="z-depth-1" src="${ img }" alt="${ name }">
+    </div>
+    <div class="col s12 m8">
+      <h3>${ name }</h3>
+      <p class="price">$${ price }.00</p>
+      <p>${ description }</p>
+    </div>
+  </div>`
+}
+
+const review = ({ id, title, rating, comment }) => {
+  return `
+  <div class="row" data-id="${ id }">
+    <div class="details col s12">
+      <h5>${ title }</h5>
+      <p>${ starRating(rating) }</p>
+      <p>${ comment }...</p>
+    </div>
+    <hr>
+  </div>`
+}
+
 module.exports = {
   header,
+  headerLogin,
   footer,
   form,
-  moreReviews,
-  collection,
+  grid,
+  review,
   one,
   editReview
 }
