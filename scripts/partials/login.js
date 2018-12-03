@@ -1,21 +1,21 @@
-const { request } = require('./requests')
-
-const login = () => {
-  document.querySelector('#form').addEventListener('submit', (e) => {
-    e.preventDefault()
-    const email = e.target.email.value
-    const password = e.target.password.value
-
-    request('/login', 'post', { email, password })
-      .then(response => {
-        localStorage.setItem('token', response.data.token)
-        window.location = '/account.html'
-      }).catch(error => console.log(error))
-  })
-}
+const { login, getid } = require('./requests')
 
 const init = () => {
-  login()
+  document.querySelector('#form').addEventListener('submit', (e) => {
+    e.preventDefault()
+    const creds = {
+      email: e.target.email.value, password: e.target.password.value
+    }
+
+    login(creds)
+      .then(response => {
+        localStorage.setItem('token', response.data.token)
+        window.location = `/snacks.html`
+      })
+      .then(getid)
+      .then(response => localStorage.setItem('id', response.data.id))
+      .catch(error => console.log(error))
+  })
 }
 
 module.exports = { init }

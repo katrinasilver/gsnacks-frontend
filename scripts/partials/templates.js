@@ -1,45 +1,21 @@
 const { starRating } = require('./utils')
+const path = window.location.pathname
 
 const header = () => {
   return `
   <nav class="red darken-3">
     <div class="nav-wrapper container">
-      <a href="/" class="brand-logo">
+      <a href="${ path === '/index.html' || path === '/' || path === '/signup.html' ? "./index.html" : "./snacks.html"}" class="brand-logo">
         gSnacks
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <a href="./signup.html">
-            <i class="tiny material-icons">account_circle</i> Signup
+        <li class=${ path !== '/' && path !== '/index.html' && path !== '/signup.html' ? "hide" : '' }>
+          <a href=${ path === '/signup.html' ? "./index.html" : "./signup.html" }><i class="tiny material-icons">account_circle</i>
+            ${ path === '/signup.html'  ? 'Login' : 'Sign-up' }
           </a>
         </li>
-        <li>
-          <a href="./login.html">
-            <i class="tiny material-icons">verified_user</i> Login
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>`
-}
-
-const headerLogin = ( email ) => {
-  return `
-  <nav class="red darken-3">
-    <div class="nav-wrapper container">
-      <a href="/" class="brand-logo">
-        gSnacks
-      </a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <a href="./signup.html">
-            <i class="tiny material-icons">account_circle</i> Hello ${ email }
-          </a>
-        </li>
-        <li>
-          <a class="logout" href="./login.html">
-            <i class="tiny material-icons">verified_user</i> Logout
-          </a>
+        <li class=${ path === '/index.html' || path === '/' || path === '/signup.html' ? "hide" : '' }>
+          <a class="logout" href="./index.html" }><i class="tiny material-icons">verified_user</i> Logout </a>
         </li>
       </ul>
     </div>
@@ -50,7 +26,7 @@ const footer = () => {
   return `
     <div class="container footer-copyright">
       <p>
-        <strong>&copy; 2018 ComicScore</strong> by <a href="https://katrina.surge.sh" target="_blank">Katrina Agustin</a>
+        <strong>&copy; 2018 gSnacks</strong> by <a href="https://katrina.surge.sh" target="_blank">Katrina Agustin</a>
       </p>
     </div>`
 }
@@ -159,22 +135,22 @@ const editReview = ({ id, title, url, rating, review }) => {
 const grid = ({ id, name, img }) => {
   return `
   <div class="item col s12 m6 l3">
-    <div class="card hoverable" data-id="${ id}">
+    <div class="card hoverable" data-id="${id}">
       <div class="card-image waves-effect waves-block waves-light">
-        <a href="./snack.html?id=${ id}">
-          <img class="activator" src="${ img}" alt="${name}">
+        <a href="./snack.html?id=${id}">
+          <img class="activator" src="${img}" alt="${name}">
         </a>
       </div>
       <div class="card-content">
-        <a href="./snack.html?id=${ id}">
-          <span class="card-title">${ name}</span>
+        <a href="./snack.html?id=${id}">
+          <span class="card-title">${name}</span>
         </a>
       </div>
     </div>
   </div>`
 }
 
-const one = ({ id, name, img, description, price }) => {
+const one = ({ id, name, img, description, price, userid }) => {
   return `
   <div class="row" data-id="${ id }">
     <div class="valign-wrapper col s12 m4">
@@ -184,6 +160,7 @@ const one = ({ id, name, img, description, price }) => {
       <h3>${ name }</h3>
       <p class="price">$${ price }.00</p>
       <p>${ description }</p>
+      <a href="./add-review.html?id=${ id }" class="btn waves-effect waves-light green edit">Review this Item</a>
     </div>
   </div>`
 }
@@ -202,7 +179,6 @@ const review = ({ id, title, rating, comment }) => {
 
 module.exports = {
   header,
-  headerLogin,
   footer,
   form,
   grid,

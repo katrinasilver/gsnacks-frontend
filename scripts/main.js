@@ -1,34 +1,28 @@
-require('./partials/render')
+const { header, footer } = require('./partials/templates')
+document.querySelector('header').innerHTML = header()
+document.querySelector('footer').innerHTML = footer()
+
 const path = window.location.pathname
-const signup = require('./partials/signup')
-const login = require('./partials/login')
-const snack = require('./partials/snack')
-const index = require('./partials/homepage')
-
-// eventListener('#form', 'submit', (e) => {
-//   e.preventDefault()
-//   const review = {
-//     id: '',
-//     title: e.target.title.value,
-//     url: e.target.image_url.value,
-//     rating: e.target.ratings.value,
-//     review: e.target.review_comment.value
-//   }
-//   create(review)
-//     .then(response => notify('.notice', 'Your review has been added! Hooray!', 1500))
-//     .catch(error => notify('.notice', 'All Fields are Required', 2000))
-
-//   e.target.reset()
-//   eventListener('.reset', 'click', () => window.location.reload(true))
-// })
 
 const initialize = {
-  '/': index.init,
-  '/index.html' : index.init,
-  '/signup.html': signup.init,
-  '/login.html': login.init,
-  '/snack.html' : snack.init
+  '/': require('./partials/login').init,
+  '/index.html': require('./partials/login').init,
+  '/signup.html': require('./partials/signup').init,
+  '/snacks.html': require('./partials/grid').init,
+  '/snack.html': require('./partials/snack').init,
+
+  '/add-review.html' : require('./partials/review').init
 }
 
 if (initialize.hasOwnProperty(path)) initialize[path]()
-else console.error(`${ path } can't initialize`)
+else console.error(`${path} can't initialize`)
+
+const leave = document.querySelector('.logout')
+if (leave) {
+  leave.addEventListener('click', (e) => {
+    e.preventDefault()
+    localStorage.removeItem('token')
+    localStorage.removeItem('id')
+    window.location = '/index.html'
+  })
+}
