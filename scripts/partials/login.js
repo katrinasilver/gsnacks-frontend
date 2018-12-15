@@ -10,7 +10,7 @@ const init = () => {
     login(creds)
       .then(response => {
         localStorage.setItem('token', response.data.token)
-        window.location = `/snacks.html`
+        window.location = `/index.html`
       })
       .then(getid)
       .then(response => localStorage.setItem('id', response.data.id))

@@ -10,15 +10,28 @@ const notify = (container, message, time) => {
   setTimeout(() => { notice.classList.add('hidden') }, time)
 }
 
+// const logout = () => {
+
+//   const logout = document.querySelector('#logout')
+//   if (logout) {
+//     logout.addEventListener('click', (e) => {
+//       e.preventDefault()
+//       localStorage.removeItem('token')
+//       localStorage.removeItem('id')
+//       window.location = '/index.html'
+//     })
+//   }
+// }
+
 const starRating = (rating) => {
   let result = ''
   let border = `<i class="material-icons blue-grey-text text-lighten-4">star</i>`
-  let star = `<i class="material-icons green-text">star</i>`
+  let star = `<i class="material-icons red-text">star</i>`
   let arr = [border, border, border, border, border]
-  let newArr = arr.slice(rating)
+  let stars = arr.slice(rating)
   for (let i = 0; i < rating; i++) {
-    newArr.unshift(star)
-    result = newArr.join('')
+    stars.unshift(star)
+    result = stars.join('')
   }
   return result
 }

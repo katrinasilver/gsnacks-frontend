@@ -57,7 +57,7 @@ const renderReview = () => {
       let layout = response.data.map(r => review(r))
       reviews.innerHTML = ''
       reviews.innerHTML = layout.join('\n')
-    }).catch(error => error)
+    }).catch(error => console.log(error))
 
   // eventListener('.delete', 'click', (e) => {
   //   e.preventDefault()

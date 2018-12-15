@@ -5,13 +5,12 @@ document.querySelector('footer').innerHTML = footer()
 const path = window.location.pathname
 
 const initialize = {
-  '/': require('./partials/login').init,
-  '/index.html': require('./partials/login').init,
+  '/': require('./partials/grid').init,
+  '/index.html': require('./partials/grid').init,
+  '/login.html': require('./partials/login').init,
   '/signup.html': require('./partials/signup').init,
-  '/snacks.html': require('./partials/grid').init,
   '/snack.html': require('./partials/snack').init,
-
-  '/add-review.html' : require('./partials/review').init
+  '/review.html' : require('./partials/review').init
 }
 
 if (initialize.hasOwnProperty(path)) initialize[path]()

@@ -1,5 +1,5 @@
 const { form } = require('./templates')
-const { readOne, postReview } = require('./requests')
+const { readOne, create } = require('./requests')
 
 const params = window.location.search.slice(1)
   .split('&').map(e => e.split('='))
