@@ -20,7 +20,7 @@ const header = () => {
 const login = (credentials) => axios.post(`${url}/login`, credentials)
 const signup = (credentials) => axios.post(`${url}/users/signup`, credentials)
 const getid = () => axios.get(`${url}/login`, header())
-const getUser = () => axios.get(`${url}/users/uid`)
+const getUser = () => axios.get(`${url}/users/${uid}`)
 
 const read = () => axios.get(snacks)
 const readOne = (id) => axios.get(`${snacks}/${id}`)
