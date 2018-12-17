@@ -3,6 +3,12 @@ const eventListener = (selector, type, fn) => {
   target.forEach(t => t.addEventListener(type, fn))
 }
 
+const params = () => {
+  return window.location.search.slice(1)
+    .split('&').map(e => e.split('='))
+    .reduce((i, e) => ({ ...i, [e[0]]: e[1] }), {})
+}
+
 const notify = (container, message, time) => {
   const notice = document.querySelector(container)
   notice.innerHTML = message
@@ -36,4 +42,4 @@ const starRating = (rating) => {
   return result
 }
 
-module.exports = { notify, eventListener, starRating }
+module.exports = { notify, eventListener, params, starRating }

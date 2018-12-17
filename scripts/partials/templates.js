@@ -1,5 +1,7 @@
 const { starRating } = require('./utils')
+const { getOne } = require('./requests')
 const path = window.location.pathname
+const uid = localStorage.getItem('id')
 
 const header = () => {
   return `
@@ -48,27 +50,38 @@ const grid = ({ id, name, img }) => {
 
 const one = ({ id, name, img, description, price }) => {
   return `
-  <div class="row" data-id="${id}">
-    <div class="valign-wrapper col s12 m4">
-      <img class="z-depth-1" src="${ img}" alt="${name}">
-    </div>
-    <div class="col s12 m7">
+  <div class="one" data-id="${id}">
+  <div class="image col s12 m11">
       <h4 class="red-text">${name}</h4>
-      <h5 class="price">$${price}.00</h5>
-      <p>${description}</p>
-      <a href="/" class="btn waves-effect waves-light green edit">Back</a>
-      <a href="./review.html?id=${id}" class="btn waves-effect waves-light green edit">Rate It!</a>
+      <img class="z-depth-1" src="${img}" alt="${name}">
     </div>
+    <a href="/" class="btn waves-effect waves-light green edit">See More Snacks</a>
+    <a ${ uid === null ? 'href="./login.html"' : ''} class="btn waves-effect waves-light green ${uid !== null ? 'trigger' : '' }">
+    ${ uid !== null ? 'Rate This!' : 'Login to Post a Review' }
+    </a>
+    <h5 class="price"><span class="green-text">Member Price:</span> $${price}.00</h5>
+    <p>${description}</p>
   </div>`
 }
 
-const review = ({ id, title, rating, comment }) => {
+const user = () => `<div class="reviewer green-text">Who is logged in? ${ getOne(uid).then(response => console.log(response.data[0].firstName)).then(name => name).catch(error => error)}</div>`
+
+const review = ({ id, account_id, title, rating, comment }) => {
+  const name = () => {
+    getOne(account_id)
+      .then(response => console.log(response.data[0].firstName))
+      .then(name => name).catch(error => error)
+  }
   return `
-  <div class="row" data-id="${id}">
-    <div class="details col s12">
-      <h5 class="green-text">${title}</h5>
+  <div data-id="${id}">
+    <div class="details">
+      <h5 class="grey-text">${title}</h5>
+      <div class="reviewer green-text">Who posted the review? ${ name() }</div>
+      ${ user() }
       <p>${starRating(rating)}</p>
       <p>${comment}</p>
+      ${ account_id !== parseInt(uid) ? '' :
+        '<button class="btn tiny waves-effect waves-light red edit">Edit</button>&nbsp;<button class="btn tiny waves-effect waves-light red delete">Delete</button>' }
     </div>
     <hr>
   </div>`
@@ -76,8 +89,8 @@ const review = ({ id, title, rating, comment }) => {
 
 const form = () => {
   return `
-  <div class="col s12 m4">Photo Soon</div>
-  <form id="form" class="form col s12 m8">
+  <form id="form" class="form collapsed">
+    <p class="hidden notice orange white-text center-align"></p>
     <div class="input-field">
       <input id="title" type="text" data-length="50" class="validate" required>
       <label for="title">Title</label>
@@ -105,19 +118,18 @@ const form = () => {
     </label>
 
     <div class="input-field">
-      <textarea id="review_comment" class="materialize-textarea" required></textarea>
-      <label for="review_comment">Comments</label>
+      <textarea id="comment" class="materialize-textarea" required></textarea>
+      <label for="comment">Comments</label>
     </div>
 
     <div class="input-field">
-      <input class="reset btn green" type="reset">
+      <input class="btn green reset" type="reset" value="Cancel">
       <input class="submit btn green" type="submit">
     </div>
-    <p class="hidden notice teal white-text center-align"></p>
-  </form>`
+  </form> <hr>`
 }
 
-const editReview = ({ id, title, url, rating, review }) => {
+const editReview = ({ id, title, url, rating, comment }) => {
   return `
   <div class="editing" data-id="${ id }">
     <form id="edit-form" class="form col s12 m8">
@@ -156,7 +168,7 @@ const editReview = ({ id, title, url, rating, review }) => {
       </label>
       <div class="input-field">
         <span><label for="review">Rating Comments</label></span>
-        <textarea id="review" name="review" class="materialize-textarea" rows="5" required>${ review }</textarea>
+        <textarea id="review" name="review" class="materialize-textarea" rows="5" required>${ comment }</textarea>
       </div>
       <div class="input-field">
         <input class="btn indigo waves-effect waves-light" type="submit">

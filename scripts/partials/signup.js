@@ -12,7 +12,7 @@ const init = () => {
     }
 
     signup(creds)
-      .then(() => { notify('.hidden', 'Account Created!', 2000) })
+      .then(() => { notify('.hidden', 'Account Created!', 1000) })
       .then(() => {
         setTimeout(() => { window.location = '/login.html' }, 2000)
       }).catch(error => notify('.hidden', 'Email not available!', 2000))

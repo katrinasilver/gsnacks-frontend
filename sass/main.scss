@@ -4,9 +4,8 @@
 
 /** Custom Variables **/
 $font: 'Raleway', sans-serif;
-$transition: all .5s ease;
+$transition: all .1s ease;
 $black: map-get($shades, 'black');
-$red: map-get($red, 'base');
 
 /** Custom Styles **/
 header .brand-logo { font: bold 2.5rem/4rem $font; }
@@ -59,43 +58,44 @@ body {
   }
 }
 
-// .reviews {
-//   margin-bottom: 0;
-//   padding: 0;
-
-//   .more-reviews {
-//     align-items: flex-start;
-//     display: flex;
-//     flex-flow: row wrap;
-//     justify-content: left;
-//   }
-// }
-
 .snack {
+  h4 { margin-top: 0;}
 
-  .row > .valign-wrapper {
-    margin-right: 1rem;
-    overflow: hidden;
-
-    @media #{$large-and-up} { min-height: 350px; }
+  .image {
+    margin-bottom: 1rem;
+    padding: 0;
   }
 }
 
-
 .form {
+  transition: $transition;
+
+  textarea,
+  input {
+    font-family: $font;
+  }
 
   .account & {
     padding: 1rem 2rem;
   }
 
-  .add-review & {
+  .review & {
+    padding-bottom: 1rem;
+
     label { margin: .5rem .5rem 0 0; }
-    textarea { height: auto; }
+
+    &.collapsed {
+      height: 0;
+      opacity: 0;
+      padding-bottom: 0;
+      visibility: hidden;
+      transition: $transition;
+    }
   }
 }
 
 /* New Rating */
-.add-review {
+.review {
 
   input[type="radio"] {
 
@@ -118,16 +118,16 @@ body {
 }
 
 /* Current Ratings */
-.collection {
+// .collection {
 
-  .details { margin-right: 1rem; }
+//   .details { margin-right: 1rem; }
 
-  a.btn {
-    display: inline-block;
-    margin: .5rem auto 1rem;
-    width: 90px;
-  }
-}
+//   a.btn {
+//     display: inline-block;
+//     margin: .5rem auto 1rem;
+//     width: 90px;
+//   }
+// }
 
 /* Utilities */
 .notice {
@@ -136,8 +136,8 @@ body {
 }
 
 .hidden {
-  height: 0;
   opacity: 0;
+  padding: 0;
   transition: $transition;
   visibility: hidden;
 }
@@ -153,7 +153,6 @@ img {
     transition: $transition;
   }
 
-  .snack &,
   .card:hover .card-image & {
     transform: scale(2);
     transition: $transition;
@@ -169,5 +168,3 @@ img {
 
   .card-action &, .nav-wrapper a & { display: inline-block; }
 }
-
-.page-footer { padding-top: 0; }

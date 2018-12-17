@@ -5099,56 +5099,57 @@ body {
     width: 100%;
     z-index: 1; }
 
-.snack .row > .valign-wrapper {
-  margin-right: 1rem;
-  overflow: hidden; }
-  @media only screen and (min-width: 993px) {
-    .snack .row > .valign-wrapper {
-      min-height: 350px; } }
+.snack h4 {
+  margin-top: 0; }
 
-.account .form {
-  padding: 1rem 2rem; }
+.snack .image {
+  margin-bottom: 1rem;
+  padding: 0; }
 
-.add-review .form label {
-  margin: .5rem .5rem 0 0; }
-
-.add-review .form textarea {
-  height: auto; }
+.form {
+  transition: all 0.1s ease; }
+  .form textarea,
+  .form input {
+    font-family: "Raleway", sans-serif; }
+  .account .form {
+    padding: 1rem 2rem; }
+  .review .form {
+    padding-bottom: 1rem; }
+    .review .form label {
+      margin: .5rem .5rem 0 0; }
+    .review .form.collapsed {
+      height: 0;
+      opacity: 0;
+      padding-bottom: 0;
+      visibility: hidden;
+      transition: all 0.1s ease; }
 
 /* New Rating */
-.add-review input[type="radio"] + span {
+.review input[type="radio"] + span {
   text-align: center; }
-  .add-review input[type="radio"] + span i {
+  .review input[type="radio"] + span i {
     display: block; }
-  .add-review input[type="radio"] + span:before, .add-review input[type="radio"] + span:after {
+  .review input[type="radio"] + span:before, .review input[type="radio"] + span:after {
     display: none; }
 
-.add-review input[type="radio"]:not(:checked) + span {
+.review input[type="radio"]:not(:checked) + span {
   padding: 0; }
 
-.add-review input[type="radio"]:checked + span {
+.review input[type="radio"]:checked + span {
   padding: 0; }
-  .add-review input[type="radio"]:checked + span i {
+  .review input[type="radio"]:checked + span i {
     color: #4CAF50; }
 
 /* Current Ratings */
-.collection .details {
-  margin-right: 1rem; }
-
-.collection a.btn, .collection a.btn-large, .collection a.btn-small {
-  display: inline-block;
-  margin: .5rem auto 1rem;
-  width: 90px; }
-
 /* Utilities */
 .notice {
   padding: .5rem;
-  transition: all 0.5s ease; }
+  transition: all 0.1s ease; }
 
 .hidden {
-  height: 0;
   opacity: 0;
-  transition: all 0.5s ease;
+  padding: 0;
+  transition: all 0.1s ease;
   visibility: hidden; }
 
 img {
@@ -5158,11 +5159,10 @@ img {
   width: 100%; }
   .card .card-image img {
     transform: scale(1.5);
-    transition: all 0.5s ease; }
-  .snack img,
+    transition: all 0.1s ease; }
   .card:hover .card-image img {
     transform: scale(2);
-    transition: all 0.5s ease; }
+    transition: all 0.1s ease; }
   .collection-item img {
     max-width: 150px; }
 
@@ -5172,6 +5172,3 @@ img {
     display: block; }
   .card-action .material-icons, .nav-wrapper a .material-icons {
     display: inline-block; }
-
-.page-footer {
-  padding-top: 0; }

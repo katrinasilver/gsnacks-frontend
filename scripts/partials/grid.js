@@ -10,13 +10,6 @@ const init = () => {
     snacks.innerHTML = layout.join('\n')
   })
   .catch(error => console.log(error))
-    // .then(() => {
-    //   getid()
-    //     .then(response => {
-    //       localStorage.setItem('id', response.data.id)
-    //       console.log(response.data.id)
-    //   })
-    // })
 }
 
 module.exports = { init }
