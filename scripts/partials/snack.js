@@ -69,7 +69,6 @@ const editReview = () => {
 
           editOne.addEventListener('submit', (e) => {
             e.preventDefault()
-
             const title = e.target.editTitle.value
             const rating = e.target.ratings.value
             const comment = e.target.editComment.value

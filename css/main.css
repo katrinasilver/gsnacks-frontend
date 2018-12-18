@@ -5072,6 +5072,8 @@ body {
   background-size: cover;
   font-family: "Raleway", sans-serif;
   min-height: 100vh; }
+  body .btn, body .btn-large, body .btn-small {
+    font-family: "Raleway", sans-serif; }
   body section.container {
     margin: 1rem auto;
     padding: 1.5rem; }
@@ -5157,7 +5159,6 @@ body {
   .review input[type="radio"]:checked + span i {
     color: #4CAF50; }
 
-/* Current Ratings */
 /* Utilities */
 .notice {
   padding: .5rem;
