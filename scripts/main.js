@@ -1,12 +1,12 @@
-const uid = localStorage.getItem('id')
 const { getOne } = require('./partials/requests')
 const { header, footer } = require('./partials/templates')
 const { logout } = require('./partials/utils')
-document.querySelector('footer').innerHTML = footer()
+const uid = localStorage.getItem('id')
+const path = window.location.pathname
 const nav = document.querySelector('header')
 
+document.querySelector('footer').innerHTML = footer()
 
-const path = window.location.pathname
 const initialize = {
   '/': require('./partials/grid').init,
   '/index.html': require('./partials/grid').init,

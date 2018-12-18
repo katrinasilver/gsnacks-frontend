@@ -73,7 +73,6 @@ const one = ({ id, name, img, description, price }) => {
   </div>`
 }
 
-
 const review = ({ id, account_id, title, rating, comment }) => {
   getOne(account_id)
     .then(response => {
