@@ -1,6 +1,10 @@
+const uid = localStorage.getItem('id')
+const { getOne } = require('./partials/requests')
 const { header, footer } = require('./partials/templates')
-document.querySelector('header').innerHTML = header()
+const { logout } = require('./partials/utils')
 document.querySelector('footer').innerHTML = footer()
+const nav = document.querySelector('header')
+
 
 const path = window.location.pathname
 const initialize = {
@@ -11,15 +15,17 @@ const initialize = {
   '/snack.html': require('./partials/snack').init
 }
 
+if (uid) {
+  getOne(uid)
+    .then(response => {
+      const name = response.data[0].firstName + ' ' + response.data[0].lastName
+      nav.innerHTML = header(name)
+      logout('#logout')
+    })
+    .catch(error => error)
+} else {
+  nav.innerHTML = header()
+}
+
 if (initialize.hasOwnProperty(path)) initialize[path]()
 else console.error(`${path} can't initialize`)
-
-const leave = document.querySelector('.logout')
-if (leave) {
-  leave.addEventListener('click', (e) => {
-    e.preventDefault()
-    localStorage.removeItem('token')
-    localStorage.removeItem('id')
-    window.location = '/index.html'
-  })
-}

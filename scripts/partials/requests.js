@@ -1,5 +1,6 @@
 const axios = require('axios')
 const uid = localStorage.getItem('id')
+// const url = 'https://gsnacks.herokuapp.com'
 const url = 'http://localhost:3000'
 const { params } = require('./utils')
 
@@ -21,7 +22,7 @@ const signup = (credentials) => axios.post(`${url}/users/signup`, credentials)
 const login = (credentials) => axios.post(`${url}/login`, credentials)
 const getid = () => axios.get(`${url}/login`, header())
 
-const getOne = (user) => axios.get(`${url}/users/${user}`) // I might not need this
+const getOne = (userid) => axios.get(`${url}/users/${userid}`) // I might not need this
 
 const read = () => axios.get(`${url}/snacks`)
 const readOne = () => axios.get(`${url}/snacks/${params().id}`)

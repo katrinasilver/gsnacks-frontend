@@ -8,7 +8,12 @@ $transition: all .1s ease;
 $black: map-get($shades, 'black');
 
 /** Custom Styles **/
-header .brand-logo { font: bold 2.5rem/4rem $font; }
+header {
+
+  .brand-logo { font: bold 2.5rem/4rem $font; }
+
+  .logout { margin-left: 1rem;}
+}
 
 body {
   background: linear-gradient( transparentize($black, .25),  transparentize($black, .25)),
@@ -169,7 +174,5 @@ img {
 .material-icons {
   vertical-align: bottom;
 
-  .add-rating & { display: block; }
-
-  .card-action &, .nav-wrapper a & { display: inline-block; }
+  .card-action &, .nav-wrapper ul li & { display: inline-block; }
 }

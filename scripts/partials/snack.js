@@ -1,6 +1,6 @@
+const { notify } = require('./utils')
 const { review, one, form, editForm } = require('./templates')
 const { readOne, create, readReviews, remove, readOneReview, edit } = require('./requests')
-const { notify } = require('./utils')
 
 const showForm = () => {
   const post = document.querySelector('#form')
@@ -28,7 +28,6 @@ const postReview = () => {
 
   document.querySelector('#form').addEventListener('submit', (e) => {
     e.preventDefault()
-
     const review = {
       title: e.target.title.value,
       rating: e.target.ratings.value,
@@ -63,9 +62,9 @@ const editReview = () => {
       let id = e.target.parentElement.parentElement.getAttribute('data-id')
       const div = document.querySelector(`div[data-id="${id}"]`)
       readOneReview(id)
-        .then(data => {
+        .then(response => {
           div.innerHTML = ''
-          div.innerHTML = editForm(data.data)
+          div.innerHTML = editForm(response.data)
 
           document.querySelector(`.editForm[data-edit="${id}"]`).addEventListener('submit', (e) => {
             e.preventDefault()

@@ -5063,6 +5063,9 @@ input[type=range]::-ms-thumb {
 header .brand-logo {
   font: bold 2.5rem/4rem "Raleway", sans-serif; }
 
+header .logout {
+  margin-left: 1rem; }
+
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("./../images/covers.jpg") no-repeat;
   background-position: top center;
@@ -5182,7 +5185,5 @@ img {
 
 .material-icons {
   vertical-align: bottom; }
-  .add-rating .material-icons {
-    display: block; }
-  .card-action .material-icons, .nav-wrapper a .material-icons {
+  .card-action .material-icons, .nav-wrapper ul li .material-icons {
     display: inline-block; }
