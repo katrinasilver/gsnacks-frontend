@@ -55,7 +55,7 @@ const one = ({ id, name, img, description, price }) => {
       <h4 class="red-text">${name}</h4>
       <img class="z-depth-1" src="${img}" alt="${name}">
     </div>
-    <a href="/" class="btn waves-effect waves-light green edit">See More Snacks</a>
+  <!--  <a href="./index.html" class="btn waves-effect waves-light green edit">See More Snacks</a> -->
     <a ${ uid === null ? 'href="./login.html"' : ''} class="btn waves-effect waves-light green ${uid !== null ? 'trigger' : '' }">
     ${ uid !== null ? 'Rate This!' : 'Login to Post a Review' }
     </a>
@@ -67,21 +67,20 @@ const one = ({ id, name, img, description, price }) => {
 const user = () => `<div class="reviewer green-text">Who is logged in? ${ getOne(uid).then(response => console.log(response.data[0].firstName)).then(name => name).catch(error => error)}</div>`
 
 const review = ({ id, account_id, title, rating, comment }) => {
-  const name = () => {
-    getOne(account_id)
-      .then(response => console.log(response.data[0].firstName))
-      .then(name => name).catch(error => error)
-  }
+  // const name = () => {
+  //   getOne(account_id)
+  //     .then(response => console.log(response.data[0].firstName))
+  //     .then(name => name).catch(error => error)
+  // }
   return `
-  <div data-id="${id}">
+  <div class="review-details" data-id="${id}">
     <div class="details">
       <h5 class="grey-text">${title}</h5>
-      <div class="reviewer green-text">Who posted the review? ${ name() }</div>
-      ${ user() }
+      <div class="reviewer green-text">Who posted the review? ${ title }</div>
       <p>${starRating(rating)}</p>
       <p>${comment}</p>
       ${ account_id !== parseInt(uid) ? '' :
-        '<button class="btn tiny waves-effect waves-light red edit">Edit</button>&nbsp;<button class="btn tiny waves-effect waves-light red delete">Delete</button>' }
+        '<button class="btn waves-effect waves-light blue-grey lighten-3 edit">Edit</button>&nbsp;<button class="btn waves-effect waves-light blue-grey lighten-3 delete">Delete</button>' }
     </div>
     <hr>
   </div>`
@@ -92,7 +91,7 @@ const form = () => {
   <form id="form" class="form collapsed">
     <p class="hidden notice orange white-text center-align"></p>
     <div class="input-field">
-      <input id="title" type="text" data-length="50" class="validate" required>
+      <input id="title" type="text" class="validate" required>
       <label for="title">Title</label>
       <span class="helper-text" data-error="oops! something is wrong..." data-success="looking good!"></span>
     </div>
@@ -126,57 +125,46 @@ const form = () => {
       <input class="btn green reset" type="reset" value="Cancel">
       <input class="submit btn green" type="submit">
     </div>
-  </form> <hr>`
+  </form>`
 }
 
-const editReview = ({ id, title, url, rating, comment }) => {
+const editForm = ({id, title, rating, comment}) => {
   return `
-  <div class="editing" data-id="${ id }">
-    <form id="edit-form" class="form col s12 m8">
-      <h4>Editing ${ title }</h4>
-      <div class="input-field">
-        <span><label for="title">Title</label></span>
-        <input id="title" name="title" type="text" data-length="50" class="validate" value="${ title }" required>
-        <span class="helper-text" data-error="oops! something is wrong..." data-success="looking good!">example: Amazing Spiderman #1</span>
-      </div>
+  <form class="editForm collapsed" data-edit=${id}>
+    <p class="hidden notice orange white-text center-align"></p>
+    <div class="input-field">
+      <input id="editTitle" type="text" class="validate" value="${ title }" autofocus required>
+      <span class="helper-text" data-error="oops! something is wrong..." data-success="looking good!"></span>
+    </div>
+    <label>
+      <input name="ratings" value="5" type="radio" ${ rating === 5 ? 'checked' : ''}/>
+      <span> <i class="medium material-icons">sentiment_very_satisfied</i> Delicious!</span>
+    </label>
+    <label>
+      <input name="ratings" value="4" type="radio" ${ rating === 4 ? 'checked' : ''}/>
+      <span> <i class="medium material-icons">sentiment_satisfied</i> Tasty!</span>
+    </label>
+    <label>
+      <input name="ratings" value="3" type="radio" ${ rating === 3 ? 'checked' : ''}/>
+      <span> <i class="medium material-icons">sentiment_neutral</i> Okay</span>
+    </label>
+    <label>
+      <input name="ratings" value="2" type="radio" ${ rating === 2 ? 'checked' : ''}/>
+      <span> <i class="medium material-icons">sentiment_dissatisfied</i> Meh...</span>
+    </label>
+    <label>
+      <input name="ratings" value="1" type="radio" ${ rating === 1 ? 'checked' : ''}/>
+      <span> <i class="medium material-icons">sentiment_very_dissatisfied</i> Yuck!</span>
+    </label>
 
-      <div class="input-field">
-        <span><label for="image_url">Image URL</label></span>
-        <input id="image_url" name="url" type="url" pattern="^(http|https):([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)" class="validate" value="${ url }" required>
-        <span class="helper-text" data-error="please use a valid image URL" data-success="looking good!"></span>
-      </div>
-
-      <label>
-        <input name="ratings" value="5" type="radio" ${ rating === 5 ? 'checked' : ''}/>
-        <span> <i class="medium material-icons">sentiment_very_satisfied</i> Love It!</span>
-      </label>
-      <label>
-        <input name="ratings" value="4" type="radio" ${ rating === 4 ? 'checked' : ''}/>
-        <span> <i class="medium material-icons">sentiment_satisfied</i> Good</span>
-      </label>
-      <label>
-        <input name="ratings" value="3" type="radio" ${ rating === 3 ? 'checked' : ''}/>
-        <span> <i class="medium material-icons">sentiment_neutral</i> Okay</span>
-      </label>
-      <label>
-        <input name="ratings" value="2" type="radio" ${ rating === 2 ? 'checked' : ''}/>
-        <span> <i class="medium material-icons">sentiment_dissatisfied</i> Meh...</span>
-      </label>
-      <label>
-        <input name="ratings" value="1" type="radio" ${ rating === 1 ? 'checked' : ''}/>
-        <span> <i class="medium material-icons">sentiment_very_dissatisfied</i> Hate It!</span>
-      </label>
-      <div class="input-field">
-        <span><label for="review">Rating Comments</label></span>
-        <textarea id="review" name="review" class="materialize-textarea" rows="5" required>${ comment }</textarea>
-      </div>
-      <div class="input-field">
-        <input class="btn indigo waves-effect waves-light" type="submit">
-        <a class="btn waves-effect waves-light red" href="./ratings.html">Cancel</a>
-      </div>
-    </form>
-    <div class="comic-image col s12 m4"><img src="${ url }" alt="${ title }"></div>
-  </div>`
+    <div class="input-field">
+      <textarea id="editComment" class="materialize-textarea" required>${ comment }</textarea>
+    </div>
+    <div class="input-field">
+      <input class="btn green reset" type="reset" value="Cancel">
+      <input class="submit btn green" type="submit">
+    </div>
+  </form> <hr>`
 }
 
 module.exports = {
@@ -186,5 +174,5 @@ module.exports = {
   grid,
   review,
   one,
-  editReview
+  editForm
 }

@@ -95,7 +95,12 @@ body {
 }
 
 /* New Rating */
+.reviews button { margin-bottom: 1rem; }
+
+.review-details,
 .review {
+
+  h5 { text-transform: capitalize; }
 
   input[type="radio"] {
 
@@ -162,7 +167,7 @@ img {
 }
 
 .material-icons {
-  vertical-align: top;
+  vertical-align: bottom;
 
   .add-rating & { display: block; }
 

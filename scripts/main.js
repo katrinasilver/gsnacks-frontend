@@ -11,34 +11,6 @@ const initialize = {
   '/snack.html': require('./partials/snack').init
 }
 
-// const del = document.querySelectorAll('.delete')
-// console.log(del)
-
-// del.forEach(d => {
-//   d.addEventListener('click', (e) => {
-//     e.preventDefault()
-//     let id = e.target.parentElement.parentElement.getAttribute('data-id')
-//     console.log(e, id)
-//     // remove(id)
-//     //   .catch(error => notify('.notice', 'Rating cannot be deleted!', 2000))
-//     //   .finally(response => renderReview(response.data))
-//   })
-// // })
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   const del = document.querySelectorAll('.delete')
-//   del.forEach(d => {
-//     d.addEventListener('click', (e) => {
-//       e.preventDefault()
-//       let id = e.target.parentElement.getAttribute('data-id')
-//       console.log(e)
-//       remove(id)
-//         .catch(error => notify('.notice', 'Rating cannot be deleted!', 2000))
-//         .finally(response => renderReview(response.data))
-//     })
-//   })
-// })
-
 if (initialize.hasOwnProperty(path)) initialize[path]()
 else console.error(`${path} can't initialize`)
 

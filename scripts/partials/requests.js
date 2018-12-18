@@ -17,18 +17,23 @@ const header = () => {
   }
 }
 
-const login = (credentials) => axios.post(`${url}/login`, credentials)
 const signup = (credentials) => axios.post(`${url}/users/signup`, credentials)
+const login = (credentials) => axios.post(`${url}/login`, credentials)
 const getid = () => axios.get(`${url}/login`, header())
-const getOne = (user) => axios.get(`${url}/users/${user}`)
+
+const getOne = (user) => axios.get(`${url}/users/${user}`) // I might not need this
 
 const read = () => axios.get(`${url}/snacks`)
 const readOne = () => axios.get(`${url}/snacks/${params().id}`)
 const readReviews = () => axios.get(`${url}/snacks/${params().id}/reviews`)
+const readOneReview = (rid) => axios.get(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, header())
 
 const create = (review) => axios.post(`${url}/users/${uid}/snacks/${params().id}/reviews`, review, header())
-// const edit = (id, rid, review) => axios.patch(`${snacks}/${id}/user/${userid}/review/${rid}`, review, header())
 const remove = (rid) => axios.delete(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, header())
+const edit = (rid, title, rating, comment) => {
+  const review = { rid, title, rating, comment }
+  axios.patch(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, review, header())
+}
 
 module.exports = {
   login,
@@ -38,7 +43,8 @@ module.exports = {
   read,
   readOne,
   readReviews,
+  readOneReview,
   create,
-  remove
-  // edit
+  remove,
+  edit
 }

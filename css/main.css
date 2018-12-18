@@ -5125,18 +5125,32 @@ body {
       transition: all 0.1s ease; }
 
 /* New Rating */
+.reviews button {
+  margin-bottom: 1rem; }
+
+.review-details h5,
+.review h5 {
+  text-transform: capitalize; }
+
+.review-details input[type="radio"] + span,
 .review input[type="radio"] + span {
   text-align: center; }
+  .review-details input[type="radio"] + span i,
   .review input[type="radio"] + span i {
     display: block; }
-  .review input[type="radio"] + span:before, .review input[type="radio"] + span:after {
+  .review-details input[type="radio"] + span:before, .review-details input[type="radio"] + span:after,
+  .review input[type="radio"] + span:before,
+  .review input[type="radio"] + span:after {
     display: none; }
 
+.review-details input[type="radio"]:not(:checked) + span,
 .review input[type="radio"]:not(:checked) + span {
   padding: 0; }
 
+.review-details input[type="radio"]:checked + span,
 .review input[type="radio"]:checked + span {
   padding: 0; }
+  .review-details input[type="radio"]:checked + span i,
   .review input[type="radio"]:checked + span i {
     color: #4CAF50; }
 
@@ -5167,7 +5181,7 @@ img {
     max-width: 150px; }
 
 .material-icons {
-  vertical-align: top; }
+  vertical-align: bottom; }
   .add-rating .material-icons {
     display: block; }
   .card-action .material-icons, .nav-wrapper a .material-icons {

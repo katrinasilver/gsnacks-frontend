@@ -1,5 +1,5 @@
-const { review, one, form } = require('./templates')
-const { readOne, create, readReviews, remove } = require('./requests')
+const { review, one, form, editForm } = require('./templates')
+const { readOne, create, readReviews, remove, readOneReview, edit } = require('./requests')
 const { notify } = require('./utils')
 
 const showForm = () => {
@@ -28,7 +28,7 @@ const postReview = () => {
 
   document.querySelector('#form').addEventListener('submit', (e) => {
     e.preventDefault()
-    console.log(e)
+
     const review = {
       title: e.target.title.value,
       rating: e.target.ratings.value,
@@ -37,7 +37,7 @@ const postReview = () => {
 
     create(review)
       .then(() => setTimeout(() => { document.querySelector('#form').classList.add('collapsed')}, 500))
-      .then(() => setTimeout(() => { window.location.reload(true) }, 1000))
+      .then(() => setTimeout(() => { window.location.reload(true) }, 0))
       .catch(error => notify('.notice', 'You already reviewed this item!', 2000))
   })
 }
@@ -50,18 +50,48 @@ const renderReview = () => {
       reviews.innerHTML = ''
       reviews.innerHTML = layout.join('\n')
     })
+    .then(editReview)
     .then(removeReview)
     .catch(error => console.log(error))
 }
 
+const editReview = () => {
+  const edt = document.querySelectorAll('.edit')
+  edt.forEach(d => {
+    d.addEventListener('click', (e) => {
+      e.preventDefault()
+      let id = e.target.parentElement.parentElement.getAttribute('data-id')
+      const div = document.querySelector(`div[data-id="${id}"]`)
+      readOneReview(id)
+        .then(data => {
+          div.innerHTML = ''
+          div.innerHTML = editForm(data.data)
+
+          document.querySelector(`.editForm[data-edit="${id}"]`).addEventListener('submit', (e) => {
+            e.preventDefault()
+            const title = e.target.editTitle.value
+            const rating = e.target.ratings.value
+            const comment = e.target.editComment.value
+
+            edit(id, title, rating, comment)
+            readOneReview(id)
+              .then(renderReview)
+              .then(renderSnack)
+              .then(() => window.location.reload(true))
+          })
+        })
+    })
+  })
+}
+
 const removeReview = () => {
-  const del = document.querySelectorAll('button.delete')
+  const del = document.querySelectorAll('.delete')
   del.forEach(d => {
     d.addEventListener('click', (e) => {
       e.preventDefault()
       let id = e.target.parentElement.parentElement.getAttribute('data-id')
       remove(id)
-        .catch(error => notify('.notice', 'Rating cannot be deleted!', 2000))
+        .catch(error => console.log(error))
         .finally(response => renderReview(response))
     })
   })
