@@ -1,8 +1,3 @@
-const eventListener = (selector, type, fn) => {
-  const target = document.querySelectorAll(selector)
-  target.forEach(t => t.addEventListener(type, fn))
-}
-
 const params = () => {
   return window.location.search.slice(1)
     .split('&').map(e => e.split('='))
@@ -16,18 +11,16 @@ const notify = (container, message, time) => {
   setTimeout(() => { notice.classList.add('hidden') }, time)
 }
 
-// const logout = () => {
-
-//   const logout = document.querySelector('#logout')
-//   if (logout) {
-//     logout.addEventListener('click', (e) => {
-//       e.preventDefault()
-//       localStorage.removeItem('token')
-//       localStorage.removeItem('id')
-//       window.location = '/index.html'
-//     })
-//   }
-// }
+const logout = (selector) => {
+  const logout = document.querySelector(selector)
+  logout.addEventListener('click', (e) => {
+    e.preventDefault()
+    console.log(`hello`)
+    localStorage.removeItem('token')
+    localStorage.removeItem('id')
+    window.location = '/index.html'
+  })
+}
 
 const starRating = (rating) => {
   let result = ''
@@ -42,4 +35,4 @@ const starRating = (rating) => {
   return result
 }
 
-module.exports = { notify, eventListener, params, starRating }
+module.exports = { notify, params, starRating, logout }

@@ -8,7 +8,10 @@ $transition: all .1s ease;
 $black: map-get($shades, 'black');
 
 /** Custom Styles **/
-header .brand-logo { font: bold 2.5rem/4rem $font; }
+header {
+  .brand-logo { font: bold 2.5rem/4rem $font; }
+  .logout { margin-left: 1rem;}
+}
 
 body {
   background: linear-gradient( transparentize($black, .25),  transparentize($black, .25)),
@@ -17,6 +20,8 @@ body {
   background-size: cover;
   font-family: $font;
   min-height: 100vh;
+
+  .btn { font-family: $font; }
 
   section.container {
     margin: 1rem auto;
@@ -29,7 +34,6 @@ body {
   }
 }
 
-/* Homepage */
 .card {
 
   .card-title {
@@ -59,7 +63,7 @@ body {
 }
 
 .snack {
-  h4 { margin-top: 0;}
+  h4 { margin-top: 0; }
 
   .image {
     margin-bottom: 1rem;
@@ -75,9 +79,7 @@ body {
     font-family: $font;
   }
 
-  .account & {
-    padding: 1rem 2rem;
-  }
+  .account & { padding: 1rem 2rem; }
 
   .review & {
     padding-bottom: 1rem;
@@ -94,7 +96,6 @@ body {
   }
 }
 
-/* New Rating */
 .reviews button { margin-bottom: 1rem; }
 
 .review-details,
@@ -122,19 +123,6 @@ body {
   }
 }
 
-/* Current Ratings */
-// .collection {
-
-//   .details { margin-right: 1rem; }
-
-//   a.btn {
-//     display: inline-block;
-//     margin: .5rem auto 1rem;
-//     width: 90px;
-//   }
-// }
-
-/* Utilities */
 .notice {
   padding: .5rem;
   transition: $transition;
@@ -168,8 +156,5 @@ img {
 
 .material-icons {
   vertical-align: bottom;
-
-  .add-rating & { display: block; }
-
-  .card-action &, .nav-wrapper a & { display: inline-block; }
+  .card-action &, .nav-wrapper ul li & { display: inline-block; }
 }

@@ -5063,12 +5063,17 @@ input[type=range]::-ms-thumb {
 header .brand-logo {
   font: bold 2.5rem/4rem "Raleway", sans-serif; }
 
+header .logout {
+  margin-left: 1rem; }
+
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("./../images/covers.jpg") no-repeat;
   background-position: top center;
   background-size: cover;
   font-family: "Raleway", sans-serif;
   min-height: 100vh; }
+  body .btn, body .btn-large, body .btn-small {
+    font-family: "Raleway", sans-serif; }
   body section.container {
     margin: 1rem auto;
     padding: 1.5rem; }
@@ -5154,7 +5159,6 @@ body {
   .review input[type="radio"]:checked + span i {
     color: #4CAF50; }
 
-/* Current Ratings */
 /* Utilities */
 .notice {
   padding: .5rem;
@@ -5182,7 +5186,5 @@ img {
 
 .material-icons {
   vertical-align: bottom; }
-  .add-rating .material-icons {
-    display: block; }
-  .card-action .material-icons, .nav-wrapper a .material-icons {
+  .card-action .material-icons, .nav-wrapper ul li .material-icons {
     display: inline-block; }

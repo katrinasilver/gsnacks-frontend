@@ -1,6 +1,6 @@
 const axios = require('axios')
 const uid = localStorage.getItem('id')
-const url = 'http://localhost:3000'
+const url = 'https://gsnacks.herokuapp.com'
 const { params } = require('./utils')
 
 const header = () => {
@@ -21,7 +21,7 @@ const signup = (credentials) => axios.post(`${url}/users/signup`, credentials)
 const login = (credentials) => axios.post(`${url}/login`, credentials)
 const getid = () => axios.get(`${url}/login`, header())
 
-const getOne = (user) => axios.get(`${url}/users/${user}`) // I might not need this
+const getOne = (userid) => axios.get(`${url}/users/${userid}`)
 
 const read = () => axios.get(`${url}/snacks`)
 const readOne = () => axios.get(`${url}/snacks/${params().id}`)
@@ -32,7 +32,7 @@ const create = (review) => axios.post(`${url}/users/${uid}/snacks/${params().id}
 const remove = (rid) => axios.delete(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, header())
 const edit = (rid, title, rating, comment) => {
   const review = { rid, title, rating, comment }
-  axios.patch(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, review, header())
+  return axios.patch(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, review, header())
 }
 
 module.exports = {
