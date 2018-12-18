@@ -65,7 +65,7 @@ const one = ({ id, name, img, description, price }) => {
       <img class="z-depth-1" src="${img}" alt="${name}">
     </div>
     <a ${uid === null ? 'href="./login.html"' : ''} class="btn waves-effect waves-light green ${uid !== null ? 'trigger' : ''}">
-    ${uid !== null ? 'Rate This!' : 'Login to Post a Review'}
+    ${uid !== null ? 'Rate This Item' : 'Login to Post a Review'}
     </a>
     <h5 class="price"><span class="grey-text">Member Price:</span> $${price}.00</h5>
     <p>${description}</p>
@@ -76,7 +76,7 @@ const one = ({ id, name, img, description, price }) => {
 const review = ({ id, account_id, title, rating, comment }) => {
   getOne(account_id)
     .then(response => {
-      let container = document.querySelector(`.reviewer[data-rid="${id}"]`)
+      let container = document.querySelector(`.reviewer[data-reviewer="${account_id}"]`)
       const name = response.data[0].firstName + ' ' + response.data[0].lastName
       container.innerHTML = `by ${name}`
     })
@@ -86,7 +86,7 @@ const review = ({ id, account_id, title, rating, comment }) => {
   <div class="review-details" data-id="${id}">
     <div class="details">
       <h5 class="grey-text">${title}</h5>
-      <div class="reviewer green-text" data-rid="${id}"></div>
+      <div class="reviewer green-text" data-reviewer="${account_id}"></div>
       <p>${starRating(rating)}</p>
       <p>${comment}</p>
       ${account_id !== parseInt(uid) ? '' :

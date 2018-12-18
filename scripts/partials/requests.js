@@ -1,7 +1,7 @@
 const axios = require('axios')
 const uid = localStorage.getItem('id')
-// const url = 'https://gsnacks.herokuapp.com'
-const url = 'http://localhost:3000'
+const url = 'https://gsnacks.herokuapp.com'
+// const url = 'http://localhost:3000'
 const { params } = require('./utils')
 
 const header = () => {

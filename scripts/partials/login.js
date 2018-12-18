@@ -12,10 +12,12 @@ const init = () => {
     login(creds)
       .then(response => {
         localStorage.setItem('token', response.data.token)
+        return getid()
+      })
+      .then(response => {
+        localStorage.setItem('id', response.data.id)
         window.location = document.referrer
       })
-      .then(getid)
-      .then(response => localStorage.setItem('id', response.data.id))
       .catch(error => notify('.notice', 'Invalid Credentials!', 1000))
   })
 }

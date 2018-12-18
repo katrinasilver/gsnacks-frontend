@@ -15,7 +15,7 @@ const initialize = {
   '/snack.html': require('./partials/snack').init
 }
 
-if (uid) {
+if (uid !== null) {
   getOne(uid)
     .then(response => {
       const name = response.data[0].firstName + ' ' + response.data[0].lastName
