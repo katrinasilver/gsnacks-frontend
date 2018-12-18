@@ -1,17 +1,21 @@
 const { signup } = require('./requests')
+const { notify } = require('./utils')
 
 const init = () => {
   document.querySelector('#form').addEventListener('submit', (e) => {
     e.preventDefault()
     const creds = {
-      email: e.target.email.value, password: e.target.password.value
+      firstName: e.target.first.value,
+      lastName: e.target.last.value,
+      email: e.target.email.value,
+      password: e.target.password.value
     }
 
     signup(creds)
-      .then(response => {
-        localStorage.setItem('token', response.data.token)
-        window.location = '/index.html'
-      }).catch(error => console.log(error))
+      .then(() => { notify('.hidden', 'Account Created!', 1000) })
+      .then(() => {
+        setTimeout(() => { window.location = '/login.html' }, 2000)
+      }).catch(error => notify('.hidden', 'Email not available!', 2000))
   })
 }
 

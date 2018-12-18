@@ -1,77 +1,105 @@
-const { review, one } = require('./templates')
-const { readOne, readReviews } = require('./requests')
+const { review, one, form, editForm } = require('./templates')
+const { readOne, create, readReviews, remove, readOneReview, edit } = require('./requests')
+const { notify } = require('./utils')
 
-const params = window.location.search.slice(1)
-  .split('&').map(e => e.split('='))
-  .reduce((i, e) => ({ ...i, [e[0]]: e[1] }), {})
+const showForm = () => {
+  const post = document.querySelector('#form')
+  const trigger = document.querySelector('.trigger')
+
+  if (trigger) {
+    trigger.addEventListener('click', () => {
+      post.classList.remove('collapsed')
+      document.querySelector('.reset').addEventListener('click', () => post.classList.add('collapsed'))
+    })
+  }
+}
 
 const renderSnack = () => {
   const snack = document.querySelector('.snack')
-
-  readOne(params.id)
-    .then(response => {
-      snack.innerHTML = one(response.data)
-
-      // eventListener('.edit', 'click', (e) => {
-      //   e.preventDefault()
-      //   container.innerHTML = editReview(response.data)
-
-      // eventListener('#edit-form', 'submit', (e) => {
-      //   e.preventDefault()
-      //   const title = e.target.title.value
-      //   const url = e.target.image_url.value
-      //   const rating = e.target.ratings.value
-      //   const review = e.target.review.value
-
-      //   update(params.id, title, url, rating, review)
-      //   readOne(params.id)
-      //     .then(response => renderOne(container, response.data))
-      //     .catch(error => error)
-      // })
-      // })
-    }).catch(error => console.log(error))
+  readOne()
+    .then(response => snack.innerHTML = one(response.data))
+    .then(() => showForm())
+    .catch(error => console.log(error))
 }
 
-// eventListener('#form', 'submit', (e) => {
-//   e.preventDefault()
-//   const review = {
-//     id: '',
-//     title: e.target.title.value,
-//     url: e.target.image_url.value,
-//     rating: e.target.ratings.value,
-//     review: e.target.review_comment.value
-//   }
-//   create(review)
-//     .then(response => notify('.notice', 'Your review has been added! Hooray!', 1500))
-//     .catch(error => notify('.notice', 'All Fields are Required', 2000))
+const postReview = () => {
+  const reviews = document.querySelector('.review')
+  reviews.innerHTML = form()
 
-//   e.target.reset()
-//   eventListener('.reset', 'click', () => window.location.reload(true))
-// })
+  document.querySelector('#form').addEventListener('submit', (e) => {
+    e.preventDefault()
 
+    const review = {
+      title: e.target.title.value,
+      rating: e.target.ratings.value,
+      comment: e.target.comment.value,
+    }
+
+    create(review)
+      .then(() => setTimeout(() => { document.querySelector('#form').classList.add('collapsed')}, 500))
+      .then(() => setTimeout(() => { window.location.reload(true) }, 0))
+      .catch(error => notify('.notice', 'You already reviewed this item!', 2000))
+  })
+}
 
 const renderReview = () => {
   const reviews = document.querySelector('.reviews')
-  readReviews(params.id)
+  readReviews()
     .then(response => {
       let layout = response.data.map(r => review(r))
       reviews.innerHTML = ''
       reviews.innerHTML = layout.join('\n')
-    }).catch(error => error)
+    })
+    .then(editReview)
+    .then(removeReview)
+    .catch(error => console.log(error))
+}
 
-  // eventListener('.delete', 'click', (e) => {
-  //   e.preventDefault()
-  //   let id = e.target.parentElement.getAttribute('data-id')
-  //   remove(id)
-  //     .catch(error => notify('.notice', 'Rating cannot be deleted!', 2000))
-  //     .finally(() => {
-  //       read().then(response => renderRatings(container, response.data))
-  //     })
-  // })
+const editReview = () => {
+  const edt = document.querySelectorAll('.edit')
+  edt.forEach(d => {
+    d.addEventListener('click', (e) => {
+      e.preventDefault()
+      let id = e.target.parentElement.parentElement.getAttribute('data-id')
+      const div = document.querySelector(`div[data-id="${id}"]`)
+      readOneReview(id)
+        .then(data => {
+          div.innerHTML = ''
+          div.innerHTML = editForm(data.data)
+
+          document.querySelector(`.editForm[data-edit="${id}"]`).addEventListener('submit', (e) => {
+            e.preventDefault()
+            const title = e.target.editTitle.value
+            const rating = e.target.ratings.value
+            const comment = e.target.editComment.value
+
+            edit(id, title, rating, comment)
+            readOneReview(id)
+              .then(renderReview)
+              .then(renderSnack)
+              .then(() => window.location.reload(true))
+          })
+        })
+    })
+  })
+}
+
+const removeReview = () => {
+  const del = document.querySelectorAll('.delete')
+  del.forEach(d => {
+    d.addEventListener('click', (e) => {
+      e.preventDefault()
+      let id = e.target.parentElement.parentElement.getAttribute('data-id')
+      remove(id)
+        .catch(error => console.log(error))
+        .finally(response => renderReview(response))
+    })
+  })
 }
 
 const init = () => {
   renderSnack()
+  postReview()
   renderReview()
 }
 

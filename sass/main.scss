@@ -4,132 +4,105 @@
 
 /** Custom Variables **/
 $font: 'Raleway', sans-serif;
-$transition: all .3s ease;
-
+$transition: all .1s ease;
 $black: map-get($shades, 'black');
-$indigo: map-get($indigo, 'base');
-$green: map-get($green, 'base');
-$red: map-get($red, 'base');
-$white: map-get($shades, 'white');
-
-/** heading size function **/
-@for $i from 1 through 6 {
-  h#{$i} {
-    color: $indigo;
-  }
-}
 
 /** Custom Styles **/
-header {
-
-  .brand-logo {
-    font: 3.5rem $font;
-    line-height: 4.5rem;
-    text-shadow: 3px 3px 0px darken($indigo, 20);
-  }
-}
+header .brand-logo { font: bold 2.5rem/4rem $font; }
 
 body {
-  background: linear-gradient( transparentize($black, .15),  transparentize($black, .15)),
-  url('./../images/covers.jpg') repeat;
-  background-position: 0 auto;
-  background-size: 0/100% auto;
+  background: linear-gradient( transparentize($black, .25),  transparentize($black, .25)),
+  url('./../images/covers.jpg') no-repeat;
+  background-position: top center;
+  background-size: cover;
   font-family: $font;
+  min-height: 100vh;
 
   section.container {
     margin: 1rem auto;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
+  }
+
+  hr {
+    border-width: 0 0 1px;
+    border-color: map-get($blue-grey, 'lighten-4');
   }
 }
 
 /* Homepage */
-.carousel {
-  margin-bottom: 3rem;
-  overflow: visible;
-
-  .card:first-child:before {
-    background: $red;
-    border: 3px solid darken($red, 20);
-    box-shadow: 1px 1px 3px transparentize($black, .2);
-    color: $white;
-    content: 'Freshest Pick!';
-    display: block;
-    font: 1.75rem $font;
-    left: -10px;
-    padding: .5rem .75rem;
-    position: absolute;
-    bottom: 50px;
-    z-index: 1000;
-  }
-
-  .carousel-item {
-    height: auto;
-    width: auto;
-
-    .rating {
-      border: 3px solid darken($green, 15);
-      bottom: 45px;
-      font: 1.75rem $font;
-      height: 60px;
-      line-height: 3.5rem;
-      right: -10px;
-      width: 60px;
-    }
-  }
-}
-
 .card {
 
   .card-title {
     font: 1.5rem $font;
-    color: $indigo;
-
-    .carousel & { font-size: 2rem; }
+    z-index: 2;
   }
+
+  .card-action a { vertical-align: middle; }
 
   .card-image {
+    background: map-get($grey, 'darken-3');
+    height: 250px;
+    overflow: hidden;
 
-    .more-reviews & {
-      max-height: 350px;
-      overflow: hidden;
+    &:before {
+      background: linear-gradient(transparentize($black, 1), transparentize($black, .3));
+      bottom: 0;
+      content: '';
+      height: 100%;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      width: 100%;
+      z-index: 1;
     }
   }
-
-  .card-stack { width: 100%; }
 }
 
-.reviews {
-  margin-bottom: 0;
-  padding: 0;
+.snack {
+  h4 { margin-top: 0;}
 
-  .more-reviews {
-    align-items: flex-start;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: left;
+  .image {
+    margin-bottom: 1rem;
+    padding: 0;
+  }
+}
+
+.form {
+  transition: $transition;
+
+  textarea,
+  input {
+    font-family: $font;
   }
 
-  h3 {
-    background: lighten($indigo, 45);
-    line-height: 4rem;
-    text-align: center;
+  .account & {
+    padding: 1rem 2rem;
+  }
+
+  .review & {
+    padding-bottom: 1rem;
+
+    label { margin: .5rem .5rem 0 0; }
+
+    &.collapsed {
+      height: 0;
+      opacity: 0;
+      padding-bottom: 0;
+      visibility: hidden;
+      transition: $transition;
+    }
   }
 }
 
 /* New Rating */
-.snack,
-.add-review {
+.reviews button { margin-bottom: 1rem; }
 
-  .form {
-    label { margin: .5rem .5rem 0 0; }
+.review-details,
+.review {
 
-    textarea {
-      height: auto;
-    }
-  }
+  h5 { text-transform: capitalize; }
 
   input[type="radio"] {
-
 
     + span {
       text-align: center;
@@ -144,22 +117,22 @@ body {
     &:checked + span {
       padding: 0;
 
-      i { color: $indigo; }
+      i { color: map-get($green, 'base') }
     }
   }
 }
 
 /* Current Ratings */
-.collection {
+// .collection {
 
-  .details { margin-right: 1rem; }
+//   .details { margin-right: 1rem; }
 
-  a.btn {
-    display: inline-block;
-    margin: .5rem auto 1rem;
-    width: 90px;
-  }
-}
+//   a.btn {
+//     display: inline-block;
+//     margin: .5rem auto 1rem;
+//     width: 90px;
+//   }
+// }
 
 /* Utilities */
 .notice {
@@ -169,6 +142,7 @@ body {
 
 .hidden {
   opacity: 0;
+  padding: 0;
   transition: $transition;
   visibility: hidden;
 }
@@ -180,29 +154,22 @@ img {
   width: 100%;
 
   .card .card-image & {
-    height: auto;
-    max-width: 300px;
+    transform: scale(1.5);
+    transition: $transition;
+  }
 
-    &.activator {
-      max-width: 100%;
-    }
+  .card:hover .card-image & {
+    transform: scale(2);
+    transition: $transition;
   }
 
   .collection-item & { max-width: 150px; }
-
 }
 
 .material-icons {
-  vertical-align: top;
+  vertical-align: bottom;
 
   .add-rating & { display: block; }
 
   .card-action &, .nav-wrapper a & { display: inline-block; }
-}
-
-.page-footer { padding-top: 0; }
-
-@keyframes backgroundScroll {
-  0% { background-position: 0 0; }
-  100% { background-position: -80vw 0; }
 }

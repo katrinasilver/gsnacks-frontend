@@ -1,6 +1,7 @@
 const axios = require('axios')
+const uid = localStorage.getItem('id')
 const url = 'http://localhost:3000'
-const snacks = `${url}/snacks`
+const { params } = require('./utils')
 
 const header = () => {
   let bearer = ''
@@ -16,25 +17,33 @@ const header = () => {
   }
 }
 
+const signup = (credentials) => axios.post(`${url}/users/signup`, credentials)
 const login = (credentials) => axios.post(`${url}/login`, credentials)
 const getid = () => axios.get(`${url}/login`, header())
-const signup = (credentials) => axios.post(`${url}/signup`, credentials)
 
-const read = () => axios.get(snacks, header())
-const readOne = (id) => axios.get(`${snacks}/${id}`, header())
-const readReviews = (id) => axios.get(`${snacks}/${id}/reviews`, header())
+const getOne = (user) => axios.get(`${url}/users/${user}`) // I might not need this
 
-const create = (id, userid, review) => axios.post(`${snacks}/${id}/user/${userid}/review/`, review, header())
-const edit = (id, rid, review) => axios.patch(`${snacks}/${id}/user/${userid}/review/${rid}`, review, header())
-const remove = (id, userid, rid) => axios.delete(`${snacks}/${id}/user/${userid}/review/${rid}`, header())
+const read = () => axios.get(`${url}/snacks`)
+const readOne = () => axios.get(`${url}/snacks/${params().id}`)
+const readReviews = () => axios.get(`${url}/snacks/${params().id}/reviews`)
+const readOneReview = (rid) => axios.get(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, header())
+
+const create = (review) => axios.post(`${url}/users/${uid}/snacks/${params().id}/reviews`, review, header())
+const remove = (rid) => axios.delete(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, header())
+const edit = (rid, title, rating, comment) => {
+  const review = { rid, title, rating, comment }
+  axios.patch(`${url}/users/${uid}/snacks/${params().id}/reviews/${rid}`, review, header())
+}
 
 module.exports = {
   login,
   signup,
   getid,
+  getOne,
   read,
   readOne,
   readReviews,
+  readOneReview,
   create,
   remove,
   edit
