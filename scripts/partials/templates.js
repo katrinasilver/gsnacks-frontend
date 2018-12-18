@@ -64,6 +64,7 @@ const one = ({ id, name, img, description, price }) => {
       <h4 class="red-text">${name}</h4>
       <img class="z-depth-1" src="${img}" alt="${name}">
     </div>
+    <a href="/" class="btn centered waves-effect waves-light green">More Snacks</a>
     <a ${uid === null ? 'href="./login.html"' : ''} class="btn waves-effect waves-light green ${uid !== null ? 'trigger' : ''}">
     ${uid !== null ? 'Rate This Item' : 'Login to Post a Review'}
     </a>
@@ -171,7 +172,6 @@ const editForm = ({id, title, rating, comment}) => {
       <textarea id="editComment" class="materialize-textarea" required>${comment}</textarea>
     </div>
     <div class="input-field">
-      <input class="btn green reset" type="reset" value="Cancel">
       <input class="submit btn green" type="submit">
     </div>
   </form> <hr>`

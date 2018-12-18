@@ -65,9 +65,11 @@ const editReview = () => {
         .then(response => {
           div.innerHTML = ''
           div.innerHTML = editForm(response.data)
+          const editOne = document.querySelector(`.editForm[data-edit="${id}"]`)
 
-          document.querySelector(`.editForm[data-edit="${id}"]`).addEventListener('submit', (e) => {
+          editOne.addEventListener('submit', (e) => {
             e.preventDefault()
+
             const title = e.target.editTitle.value
             const rating = e.target.ratings.value
             const comment = e.target.editComment.value
