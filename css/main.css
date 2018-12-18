@@ -5062,18 +5062,22 @@ input[type=range]::-ms-thumb {
 /** Custom Styles **/
 header .brand-logo {
   font: bold 2.5rem/4rem "Raleway", sans-serif; }
+  @media only screen and (max-width: 600px) {
+    header .brand-logo {
+      font-size: 1.5rem; } }
 
 header .logout {
-  margin-left: 1rem; }
+  margin-left: .5rem; }
 
 body {
-  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("./../images/covers.jpg") no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("./../images/covers.jpg");
   background-position: top center;
   background-size: cover;
   font-family: "Raleway", sans-serif;
   min-height: 100vh; }
   body .btn, body .btn-large, body .btn-small {
-    font-family: "Raleway", sans-serif; }
+    font-family: "Raleway", sans-serif;
+    margin-bottom: 1rem; }
   body section.container {
     margin: 1rem auto;
     padding: 1.5rem; }
@@ -5081,7 +5085,6 @@ body {
     border-width: 0 0 1px;
     border-color: #cfd8dc; }
 
-/* Homepage */
 .card .card-title {
   font: 1.5rem "Raleway", sans-serif;
   z-index: 2; }
@@ -5129,7 +5132,6 @@ body {
       visibility: hidden;
       transition: all 0.1s ease; }
 
-/* New Rating */
 .reviews button {
   margin-bottom: 1rem; }
 
@@ -5159,7 +5161,6 @@ body {
   .review input[type="radio"]:checked + span i {
     color: #4CAF50; }
 
-/* Utilities */
 .notice {
   padding: .5rem;
   transition: all 0.1s ease; }

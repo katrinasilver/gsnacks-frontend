@@ -18,7 +18,7 @@ const initialize = {
 if (uid !== null) {
   getOne(uid)
     .then(response => {
-      const name = response.data[0].firstName + ' ' + response.data[0].lastName
+      const name = response.data[0].firstName
       nav.innerHTML = header(name)
       logout('#logout')
     })

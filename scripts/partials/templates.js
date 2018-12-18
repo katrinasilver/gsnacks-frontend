@@ -4,15 +4,15 @@ const uid = localStorage.getItem('id')
 
 const greeting = (name) => {
   return `
-  <li><i class="tiny material-icons logout">account_circle</i> Hi, ${name}!</li>
-  <li><a id="logout" class="logout"><i class="tiny material-icons">exit_to_app</i> Logout</a></li>
+  <li><i class="hide-on-med-and-down tiny material-icons logout">account_circle</i> Hi, ${name}!</li>
+  <li><a id="logout" class="logout"><i class="hide-on-med-and-down tiny material-icons">exit_to_app</i> Logout</a></li>
   `
 }
 
 const login = () => {
   return `
-  <li><a href="./signup.html" class="signup"><i class="tiny material-icons">account_circle</i> Signup</a></li>
-  <li><a href="./login.html" class="login"><i class="tiny material-icons">verified_user</i> Login</a></li>
+  <li><a href="./signup.html" class="signup"><i class="hide-on-med-and-down tiny material-icons">account_circle</i> Signup</a></li>
+  <li><a href="./login.html" class="login"><i class="hide-on-med-and-down tiny material-icons">verified_user</i> Login</a></li>
   `
 }
 
@@ -20,10 +20,10 @@ const header = (name = '') => {
   return `
   <nav class="red darken-3">
     <div class="nav-wrapper container">
-      <a href="/" class="brand-logo">
+      <a href="/" class="left brand-logo">
         gSNACKS
       </a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" class="right">
         ${ uid !== null ? greeting(name) : login() }
       </ul>
     </div>

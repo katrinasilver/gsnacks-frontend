@@ -9,19 +9,28 @@ $black: map-get($shades, 'black');
 
 /** Custom Styles **/
 header {
-  .brand-logo { font: bold 2.5rem/4rem $font; }
-  .logout { margin-left: 1rem;}
+  .brand-logo {
+    font: bold 2.5rem/4rem $font;
+
+    @media #{$small-and-down} {
+      font-size: 1.5rem;
+    }
+  }
+  .logout { margin-left: .5rem;}
 }
 
 body {
   background: linear-gradient( transparentize($black, .25),  transparentize($black, .25)),
-  url('./../images/covers.jpg') no-repeat;
+  url('./../images/covers.jpg');
   background-position: top center;
   background-size: cover;
   font-family: $font;
   min-height: 100vh;
 
-  .btn { font-family: $font; }
+  .btn {
+    font-family: $font;
+    margin-bottom: 1rem;
+  }
 
   section.container {
     margin: 1rem auto;
