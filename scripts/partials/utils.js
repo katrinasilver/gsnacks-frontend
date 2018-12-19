@@ -15,10 +15,9 @@ const logout = (selector) => {
   const logout = document.querySelector(selector)
   logout.addEventListener('click', (e) => {
     e.preventDefault()
-    console.log(`hello`)
     localStorage.removeItem('token')
     localStorage.removeItem('id')
-    window.location = '/index.html'
+    window.location = document.referrer
   })
 }
 
