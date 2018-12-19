@@ -12,9 +12,7 @@ header {
   .brand-logo {
     font: bold 2.5rem/4rem $font;
 
-    @media #{$small-and-down} {
-      font-size: 1.5rem;
-    }
+    @media #{$small-and-down} { font-size: 1.5rem; }
   }
   .logout { margin-left: .5rem;}
 }
@@ -26,6 +24,8 @@ body {
   background-size: cover;
   font-family: $font;
   min-height: 100vh;
+
+  @media #{$medium-and-up} { background-size: cover auto; }
 
   .btn {
     font-family: $font;
@@ -83,10 +83,7 @@ body {
 .form {
   transition: $transition;
 
-  textarea,
-  input {
-    font-family: $font;
-  }
+  textarea, input { font-family: $font; }
 
   .account & { padding: 1rem 2rem; }
 
@@ -109,8 +106,6 @@ body {
 
 .review-details,
 .review {
-
-  h5 { text-transform: capitalize; }
 
   input[type="radio"] {
 

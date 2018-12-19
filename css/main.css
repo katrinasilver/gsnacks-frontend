@@ -5075,6 +5075,9 @@ body {
   background-size: cover;
   font-family: "Raleway", sans-serif;
   min-height: 100vh; }
+  @media only screen and (min-width: 601px) {
+    body {
+      background-size: cover auto; } }
   body .btn, body .btn-large, body .btn-small {
     font-family: "Raleway", sans-serif;
     margin-bottom: 1rem; }
@@ -5116,8 +5119,7 @@ body {
 
 .form {
   transition: all 0.1s ease; }
-  .form textarea,
-  .form input {
+  .form textarea, .form input {
     font-family: "Raleway", sans-serif; }
   .account .form {
     padding: 1rem 2rem; }
@@ -5134,10 +5136,6 @@ body {
 
 .reviews button {
   margin-bottom: 1rem; }
-
-.review-details h5,
-.review h5 {
-  text-transform: capitalize; }
 
 .review-details input[type="radio"] + span,
 .review input[type="radio"] + span {
