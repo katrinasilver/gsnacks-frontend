@@ -77,9 +77,10 @@ const editReview = () => {
             readOneReview(id)
               .then(renderReview)
               .then(renderSnack)
-              .then(() => window.location.reload(true))
+              .catch(error => console.log(error))
           })
         })
+        .catch(error => console.log(error))
     })
   })
 }
