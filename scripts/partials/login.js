@@ -16,7 +16,8 @@ const init = () => {
       })
       .then(response => {
         localStorage.setItem('id', response.data.id)
-        window.location = document.referrer
+
+        window.location = document.referrer.includes('signup.html') ? '/' : document.referrer
       })
       .catch(error => notify('.notice', 'Invalid Credentials!', 1000))
   })

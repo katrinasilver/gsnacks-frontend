@@ -10,6 +10,8 @@ const showForm = () => {
     trigger.addEventListener('click', () => {
       post.classList.remove('collapsed')
       document.querySelector('.reset').addEventListener('click', () => post.classList.add('collapsed'))
+      console.log(document.referrer);
+
     })
   }
 }
