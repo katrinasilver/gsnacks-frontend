@@ -1,4 +1,4 @@
-# gSnacks Front-end
+# gSnacks Frontend
 
 This is a fully-responsive, [data-driven](https://github.com/katrinasilver/gsnacks-backend), rating site for [gSnacks](https://gsnacks.surge.sh/)
 
