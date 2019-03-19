@@ -7,6 +7,7 @@ This is a fully-responsive, [data-driven](https://github.com/katrinasilver/gsnac
 - Fork and clone this repository
 - Install Node.js in your system
 - Run `npm install` to get the dependencies
+- To see this application in full functionality, download and configure the [API and Backend Services](https://github.com/katrinasilver/gsnacks-backend). (See repo for setup instructions)
 
 # Features
 
